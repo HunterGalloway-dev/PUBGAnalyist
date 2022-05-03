@@ -1,0 +1,2 @@
+class TwireLinkController < ApplicationController
+end

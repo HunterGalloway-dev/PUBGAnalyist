@@ -1,0 +1,10 @@
+<div id="<%= dom_id player %>">
+    <%= player.name%>
+    <% if scrims_all %>
+        <ul>
+            <li> Num Matches: <%= scrims_all.number_of_matches%>
+            <li>KD <%= scrims_all.kills / scrims_all.number_of_matches.to_d %></li>
+            <li>ADR <%= scrims_all.damage_dealt / scrims_all.number_of_matches.to_d%></li>
+        <ul>
+    <% end %>
+</div>

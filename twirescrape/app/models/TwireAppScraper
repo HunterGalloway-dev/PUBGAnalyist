@@ -1,0 +1,9 @@
+require 'kimurai'class SlackAppsScraper < Kimurai::Base
+    @name= 'slack_spider'
+    @engine = :mechanize
+    @start_urls = ['https://slack.com/apps/category/AtHC5Q7RUJ-daily-tools']
+    
+    def parse(response, url:, data: {})
+        # scrape body here
+    end
+end
