@@ -1,0 +1,71 @@
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7158727973194131915)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(7158727973194131915)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (19.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "twirescrape_test"[0m
+  [1m[35m (282.4ms)[0m  [1m[35mCREATE DATABASE "twirescrape_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "invalid_links" CASCADE[0m
+  [1m[35m (10.3ms)[0m  [1m[35mCREATE TABLE "invalid_links" ("id" bigserial primary key, "link" character varying, "original_link" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "player_scrims" CASCADE[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "player_scrims" ("id" bigserial primary key, "player_id" bigint, "scrim_id" character varying, "deaths" integer, "scrim_name" character varying, "twr" integer, "number_of_matches" integer, "kills" integer, "assists" integer, "kda" decimal(5,2), "kd" decimal(5,2), "kas" decimal(5,2), "knocks" integer, "kills_knocks" integer, "damage_dealt" integer, "ar_damage" integer, "dmr_damage" integer, "sr_damage" integer, "avg_damage_dealt" integer, "damage_taken" integer, "avg_damage_taken" decimal(5,2), "damage_taken_zone" integer, "damage_taken_enemy" integer, "damage_dealt_damage_taken" integer, "revives" integer, "died_1st" integer, "died_2nd" integer, "died_3rd" integer, "died_4th" integer, "knocked" integer, "revived" integer, "headshot_kills" integer, "longest_kill_m" integer, "stolen_kills" integer, "lost_kills" integer, "grenades_picked" integer, "grenades_dropped" integer, "grenades_thrown" integer, "grenades_damage" integer, "molotovs_picked" integer, "molotovs_dropped" integer, "molotovs_thrown" integer, "molotovs_damage" integer, "smokes_picked" integer, "smokes_dropped" integer, "smokes_thrown" integer, "flashes_picked" integer, "flashes_dropped" integer, "flashes_thrown" integer, "swimming_distance_km" integer, "walk_distance_km" integer, "ride_distance_km" integer, "time_survived" time, "avg_time_survived" time, "heals" integer, "health_recovered" integer, "boosts" integer, "vehicle_destroys" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE INDEX "index_player_scrims_on_player_id" ON "player_scrims" ("player_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "players" CASCADE[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "players" ("id" bigserial primary key, "twire_link_id" bigint, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE INDEX "index_players_on_twire_link_id" ON "players" ("twire_link_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "team_scrims" CASCADE[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "team_scrims" ("id" bigserial primary key, "team_id" bigint, "scrim_id" character varying, "scrim_name" character varying, "number_of_matches" integer, "total_points" integer, "avg_total_points" decimal, "wwcd" integer, "avg_rank" decimal, "placement_points" integer, "avg_placement_points" decimal, "kills" integer, "avg_kills" integer, "assists" integer, "damage_dealt" integer, "avg_damage_dealt" decimal, "damage_taken" integer, "avg_damage_taken" decimal, "knocks" integer, "revives" integer, "headshot_kills" integer, "stolen_kills" integer, "lost_kills" integer, "grenades_picked" integer, "grenades_dropped" integer, "grenades_thrown" integer, "grenades_damage" integer, "molotovs_picked" integer, "molotovs_dropped" integer, "molotovs_thrown" integer, "molotovs_damage" integer, "smokes_picked" integer, "smokes_dropped" integer, "smokes_thrown" integer, "flashes_picked" integer, "flashes_dropped" integer, "flashes_thrown" integer, "swimming_distance_km" integer, "walk_distance_km" integer, "ride_distance_km" integer, "time_survived" time, "avg_time_survived" time, "heals" integer, "health_recovered" integer, "boosts" integer, "vehicle_destroys" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE INDEX "index_team_scrims_on_team_id" ON "team_scrims" ("team_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "teams" CASCADE[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "teams" ("id" bigserial primary key, "twire_link_id" bigint, "team_name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE INDEX "index_teams_on_twire_link_id" ON "teams" ("twire_link_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "twire_links" CASCADE[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "twire_links" ("id" bigserial primary key, "name" character varying, "link" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "player_scrims" ADD CONSTRAINT "fk_rails_fe1a9bc98c"
+FOREIGN KEY ("player_id")
+  REFERENCES "players" ("id")
+[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "players" ADD CONSTRAINT "fk_rails_e8cd0b6521"
+FOREIGN KEY ("twire_link_id")
+  REFERENCES "twire_links" ("id")
+[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "team_scrims" ADD CONSTRAINT "fk_rails_6fc61a0b0b"
+FOREIGN KEY ("team_id")
+  REFERENCES "teams" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "teams" ADD CONSTRAINT "fk_rails_e69706b937"
+FOREIGN KEY ("twire_link_id")
+  REFERENCES "twire_links" ("id")
+[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20220505231352)[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20220430032559),
+(20220430115754),
+(20220430124816),
+(20220502074645),
+(20220504043900),
+(20220505231336);
+
+[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-05-07 10:54:10.059902"], ["updated_at", "2022-05-07 10:54:10.059902"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2022-05-07 10:54:10.065406"], ["key", "environment"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "e100ab393f9284ec2cf4240ea3b88cd0e5b98bae"], ["created_at", "2022-05-07 10:54:10.069761"], ["updated_at", "2022-05-07 10:54:10.069761"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
