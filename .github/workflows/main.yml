@@ -11,6 +11,9 @@ on:
 jobs:
   Test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./twirescrape
     services:
       postgres:
         image: postgres:12
