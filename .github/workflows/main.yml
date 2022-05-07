@@ -27,17 +27,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-        working-directory: ${{env.working-directory}}
 
       - name: Setup Ruby 3.7
         uses: ruby/setup-ruby@v1
-        working-directory: ${{env.working-directory}}
         with:
           ruby-version: 3.0.2
 
       - name: Setup Node 16
         uses: actions/setup-node@v1
-        working-directory: ${{env.working-directory}}
         with:
           node-version: 16.x
 
@@ -54,6 +51,8 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
+
       - name: Cache gems
         uses: actions/cache@v1
         working-directory: ${{env.working-directory}}
