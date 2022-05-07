@@ -17,8 +17,12 @@ class PlayersController < ApplicationController
     p @player.player_scrim.length
     @line_data = []
 
-    @player.player_scrim.reverse_each do |scrim|
+    
 
+    @player.player_scrim.reverse_each do |scrim|
+      if scrim.id == @scrims_all.id
+        next
+      end
       @scrims_all.twr += scrim.twr
       @scrims_all.number_of_matches += scrim.number_of_matches
       @scrims_all.deaths = @scrim 
@@ -74,7 +78,8 @@ class PlayersController < ApplicationController
       
     end
 
-    @scrims = @player.player_scrim.reverse
+
+    @scrims = @player.player_scrim.sort_by(&:scrim_id)
 
   end
 

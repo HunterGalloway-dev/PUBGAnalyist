@@ -1,0 +1,2 @@
+class InvalidLink < ApplicationRecord
+end

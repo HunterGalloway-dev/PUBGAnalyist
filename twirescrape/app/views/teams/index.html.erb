@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Teams Count <%= @teams.count %></h1>
+<%= form_tag(teams_path, method: :get) do%>
+  <%=text_field_tag(:search, params[:search], class: 'form-control') %>
+<%end%>
+<i class="fa-solid fa-a"></i>
+<div id="players">
+  <% @teams.each do |team| %>
+    <%= team.team_name %>
+    <p>
+      <%= link_to "Show this team", team %>
+    </p>
+  <% end %>
+</div>

@@ -51,6 +51,8 @@ gem 'sassc-rails'
 
 gem "font-awesome-rails"
 
+gem "byebug"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
