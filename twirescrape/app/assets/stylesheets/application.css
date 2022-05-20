@@ -12,4 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
+
+ .link-unstyled, .link-unstyled:link, .link-unstyled:hover {
+    color: inherit;
+    text-decoration: inherit;
+  }

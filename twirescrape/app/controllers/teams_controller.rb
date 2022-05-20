@@ -1,6 +1,8 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: %i[ show ]
   
+  layout "hub"
+
   def index
     if params[:search] && params[:search].length > 0
       @teams = Team.search(params)

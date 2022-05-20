@@ -10139,7 +10139,7 @@ a:focus {
   border: 0;
   font-weight: 900;
   content: '\f105';
-  font-family: 'Font Awesome 5 Free';
+  font-family: 'Font Awesome\ 5 Free';
 }
 
 .sidebar .nav-item.dropdown.show .dropdown-toggle::after,

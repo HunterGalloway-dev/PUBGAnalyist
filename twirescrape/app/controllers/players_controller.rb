@@ -1,8 +1,10 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: %i[ show edit update destroy ]
-  render template: 'layouts/admin'
+  layout "hub"
   # GET /players or /players.json
   def index
+
+    #puts current_user.username
     if params[:search] && params[:search].length > 0
       @players = Player.search(params)
       puts @players.length
