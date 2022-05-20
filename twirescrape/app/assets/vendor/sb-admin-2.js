@@ -1,9 +1,6 @@
 (function($) {
   "use strict"; // Start of use strict
-  var scrims = ($('.scrims').data('temp'))
-  var scrims_all = ($('.scrims_all').data('temp'))
-  var twr_bar = $("#twr-bar").width(Math.trunc(scrims_all.twr / scrims.length)+ '%')
-  console.log(twr_bar)
+  
 
   // Toggle the side navigation
   $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {

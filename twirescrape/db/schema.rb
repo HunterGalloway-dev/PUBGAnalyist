@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_02_074645) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_09_135919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "invalid_links", force: :cascade do |t|
+    t.string "link"
+    t.string "original_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "player_scrims", force: :cascade do |t|
     t.bigint "player_id"
+    t.string "scrim_id"
     t.integer "deaths"
     t.string "scrim_name"
     t.integer "twr"
@@ -24,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_02_074645) do
     t.integer "assists"
     t.decimal "kda", precision: 5, scale: 2
     t.decimal "kd", precision: 5, scale: 2
-    t.decimal "kas"
+    t.decimal "kas", precision: 5, scale: 2
     t.integer "knocks"
     t.integer "kills_knocks"
     t.integer "damage_dealt"
@@ -84,6 +92,65 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_02_074645) do
     t.index ["twire_link_id"], name: "index_players_on_twire_link_id"
   end
 
+  create_table "team_scrims", force: :cascade do |t|
+    t.bigint "team_id"
+    t.string "scrim_id"
+    t.string "scrim_name"
+    t.integer "number_of_matches"
+    t.integer "total_points"
+    t.decimal "avg_total_points"
+    t.integer "wwcd"
+    t.decimal "avg_rank"
+    t.integer "placement_points"
+    t.decimal "avg_placement_points"
+    t.integer "kills"
+    t.integer "avg_kills"
+    t.integer "assists"
+    t.integer "damage_dealt"
+    t.decimal "avg_damage_dealt"
+    t.integer "damage_taken"
+    t.decimal "avg_damage_taken"
+    t.integer "knocks"
+    t.integer "revives"
+    t.integer "headshot_kills"
+    t.integer "stolen_kills"
+    t.integer "lost_kills"
+    t.integer "grenades_picked"
+    t.integer "grenades_dropped"
+    t.integer "grenades_thrown"
+    t.integer "grenades_damage"
+    t.integer "molotovs_picked"
+    t.integer "molotovs_dropped"
+    t.integer "molotovs_thrown"
+    t.integer "molotovs_damage"
+    t.integer "smokes_picked"
+    t.integer "smokes_dropped"
+    t.integer "smokes_thrown"
+    t.integer "flashes_picked"
+    t.integer "flashes_dropped"
+    t.integer "flashes_thrown"
+    t.integer "swimming_distance_km"
+    t.integer "walk_distance_km"
+    t.integer "ride_distance_km"
+    t.time "time_survived"
+    t.time "avg_time_survived"
+    t.integer "heals"
+    t.integer "health_recovered"
+    t.integer "boosts"
+    t.integer "vehicle_destroys"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_scrims_on_team_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.bigint "twire_link_id"
+    t.string "team_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["twire_link_id"], name: "index_teams_on_twire_link_id"
+  end
+
   create_table "twire_links", force: :cascade do |t|
     t.string "name"
     t.string "link"
@@ -91,6 +158,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_02_074645) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username", default: "", null: false
+    t.string "discord_id", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "avatar"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "player_scrims", "players"
   add_foreign_key "players", "twire_links"
+  add_foreign_key "team_scrims", "teams"
+  add_foreign_key "teams", "twire_links"
 end

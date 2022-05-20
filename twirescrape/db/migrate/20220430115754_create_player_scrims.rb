@@ -3,6 +3,7 @@ class CreatePlayerScrims < ActiveRecord::Migration[7.0]
     create_table :player_scrims do |t|
       t.belongs_to :player, foreign_key: true
       
+      t.string :scrim_id
       t.integer :deaths
       t.string :scrim_name
       t.integer :twr
